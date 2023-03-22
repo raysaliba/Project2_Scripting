@@ -3,8 +3,6 @@ import requests
 import sys
 
 
-
-available = False;
 link = sys.argv[1]
 
 def check_website(link):
@@ -19,7 +17,7 @@ def check_subdomain(link):
             response = requests.get(new_url)
 
             if response.status_code == 200:
-                with open('sundomains_output.bat', 'a') as j:
+                with open('subdomains_output.bat', 'a') as j:
                         j.write(line)
 
 def check_directories(link):
