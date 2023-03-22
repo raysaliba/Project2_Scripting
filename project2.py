@@ -23,7 +23,14 @@ def check_subdomain(link):
                         f.write(line)
 
 def check_directories(link):
+    with open('dirs_dictionary.bat') as f:
+        for line in f:
+            new_url= link+"/"+line+"/"
+            response = requests.get(new_url)
 
+            if response.status_code == 200:
+                with open('directories_output.bat', 'a') as j:
+                        j.write(line)
 
 
 
