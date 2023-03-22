@@ -19,8 +19,8 @@ def check_subdomain(link):
             response = requests.get(new_url)
 
             if response.status_code == 200:
-                with open('sundomains_output.bat', 'a') as f:
-                        f.write(line)
+                with open('sundomains_output.bat', 'a') as j:
+                        j.write(line)
 
 def check_directories(link):
     with open('dirs_dictionary.bat') as f:
@@ -35,4 +35,22 @@ def check_directories(link):
 
 
 def check_files(link):
-   
+    response = requests.get(link)
+    html_content = response.content
+
+    html_string = html_content.decode('utf-8')
+    pattern = r"(?:href:(.*\..*))"
+    list = re.findall(pattern,html_string)
+    for line in list:
+        with open('files_output.bat', 'a') as j:
+                        j.write(line)
+
+
+if check_website(link):
+    check_subdomain(link)
+    check_directories(link)
+    check_files(link)
+else:
+    print("the website entered is not valid")
+
+
